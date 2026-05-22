@@ -1,0 +1,372 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+}
+
+/* Auth Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+}
+
+.auth-box {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.auth-box h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #58a6ff;
+    text-align: center;
+}
+
+.auth-box > p {
+    text-align: center;
+    color: #8b949e;
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    background: #238636;
+    color: white;
+    border-color: #238636;
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-form input {
+    padding: 12px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #58a6ff;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+}
+
+.auth-form button {
+    padding: 12px;
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.auth-form button:hover {
+    background: #2ea043;
+}
+
+.divider {
+    text-align: center;
+    color: #8b949e;
+    font-size: 12px;
+    margin: 12px 0;
+}
+
+.github-btn {
+    display: block;
+    padding: 12px;
+    background: #30363d;
+    color: #c9d1d9;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.github-btn:hover {
+    background: #3d444d;
+}
+
+/* IDE Container */
+.ide-container {
+    display: grid;
+    grid-template-columns: 250px 1fr 350px;
+    height: 100vh;
+    background: #0d1117;
+}
+
+.sidebar {
+    background: #161b22;
+    border-right: 1px solid #30363d;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-profile {
+    padding: 16px;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-info p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 6px;
+    background: #da3633;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.file-explorer {
+    padding: 16px;
+    flex: 1;
+}
+
+.file-explorer h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #8b949e;
+    margin-bottom: 12px;
+}
+
+.new-workspace-btn {
+    width: 100%;
+    padding: 8px;
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.workspace-item {
+    padding: 8px;
+    background: #0d1117;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.workspace-item:hover {
+    background: #1c2128;
+}
+
+/* Editor Section */
+.editor-section {
+    display: flex;
+    flex-direction: column;
+    background: #0d1117;
+}
+
+.editor-tabs {
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    padding: 8px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+}
+
+.editor-tab {
+    padding: 8px 12px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.editor-tab.active {
+    background: #0d1117;
+    border-bottom-color: #58a6ff;
+    color: #58a6ff;
+}
+
+.editor-main {
+    flex: 1;
+    overflow: hidden;
+}
+
+.code-editor {
+    width: 100%;
+    height: 100%;
+    background: #0d1117;
+    color: #c9d1d9;
+    font-family: 'Monaco', 'Courier New', monospace;
+    padding: 16px;
+    overflow: auto;
+}
+
+/* Right Panel */
+.right-panel {
+    background: #161b22;
+    border-left: 1px solid #30363d;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-tabs {
+    display: flex;
+    border-bottom: 1px solid #30363d;
+}
+
+.panel-tab-btn {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    color: #8b949e;
+    cursor: pointer;
+    font-size: 13px;
+    border-bottom: 2px solid transparent;
+}
+
+.panel-tab-btn.active {
+    color: #58a6ff;
+    border-bottom-color: #58a6ff;
+}
+
+.panel {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+    display: none;
+}
+
+.panel.active {
+    display: flex;
+    flex-direction: column;
+}
+
+#previewFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+#terminal {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 12px;
+    font-family: 'Monaco', monospace;
+    font-size: 13px;
+}
+
+.terminal-input {
+    padding: 8px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    border-radius: 4px;
+    font-family: 'Monaco', monospace;
+}
+
+.git-input {
+    width: 100%;
+    padding: 8px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.git-input:focus {
+    outline: none;
+    border-color: #58a6ff;
+}
+
+.git-panel button {
+    width: 100%;
+    padding: 8px;
+    background: #238636;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.git-status {
+    margin-top: 12px;
+    padding: 8px;
+    background: #0d1117;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* XTerm */
+.xterm {
+    font-family: 'Monaco', monospace;
+    font-size: 13px;
+}
+
+.xterm-viewport {
+    overflow-y: scroll;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowDevelop - Cloud IDE</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/lib/xterm.css">
+</head>
+<body>
+    <div id="app">
+        <div class="auth-container" id="authContainer">
+            <div class="auth-box">
+                <h1>ShadowDevelop</h1>
+                <p>Professional Cloud Development Environment</p>
+                
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="register">Register</button>
+                </div>
+                
+                <form id="loginForm" class="auth-form active">
+                    <input type="text" placeholder="Username or Email" id="loginUsername" required>
+                    <input type="password" placeholder="Password" id="loginPassword" required>
+                    <button type="submit">Login</button>
+                    <p class="divider">OR</p>
+                    <a href="/auth/github" class="github-btn">Login with GitHub</a>
+                </form>
+                
+                <form id="registerForm" class="auth-form">
+                    <input type="text" placeholder="Username" id="regUsername" required>
+                    <input type="email" placeholder="Email" id="regEmail" required>
+                    <input type="password" placeholder="Password" id="regPassword" required>
+                    <input type="password" placeholder="Confirm Password" id="regConfirm" required>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="ide-container" id="ideContainer" style="display: none;">
+            <div class="sidebar">
+                <div class="user-profile">
+                    <img id="userAvatar" src="" alt="Avatar">
+                    <div class="user-info">
+                        <p id="userName"></p>
+                        <button class="logout-btn" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+                
+                <div class="file-explorer">
+                    <h3>Workspaces</h3>
+                    <button class="new-workspace-btn" onclick="createWorkspace()">+ New Workspace</button>
+                    <div id="workspacesList"></div>
+                </div>
+            </div>
+            
+            <div class="editor-section">
+                <div class="editor-tabs">
+                    <div id="editorTabs" class="tabs-container"></div>
+                </div>
+                
+                <div class="editor-main">
+                    <div id="codeEditor" class="code-editor"></div>
+                </div>
+            </div>
+            
+            <div class="right-panel">
+                <div class="panel-tabs">
+                    <button class="panel-tab-btn active" data-panel="preview">Preview</button>
+                    <button class="panel-tab-btn" data-panel="terminal">Terminal</button>
+                    <button class="panel-tab-btn" data-panel="git">Git</button>
+                </div>
+                
+                <div class="preview-panel panel active" id="previewPanel">
+                    <iframe id="previewFrame"></iframe>
+                </div>
+                
+                <div class="terminal-panel panel" id="terminalPanel">
+                    <div id="terminal"></div>
+                    <input type="text" id="terminalInput" placeholder="$ Enter command..." class="terminal-input">
+                </div>
+                
+                <div class="git-panel panel" id="gitPanel">
+                    <h3>Git Repository</h3>
+                    <input type="text" id="repoUrl" placeholder="GitHub repo URL" class="git-input">
+                    <button onclick="importRepo()">Import Repository</button>
+                    <div id="gitStatus" class="git-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/lib/xterm.js"></script>
+    <script src="/lib/xterm-addon-fit.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
