@@ -6,90 +6,216 @@
     <title>ShadowDevelop - Cloud IDE</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/lib/xterm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div id="app">
+        <!-- Auth Container -->
         <div class="auth-container" id="authContainer">
-            <div class="auth-box">
-                <h1>ShadowDevelop</h1>
-                <p>Professional Cloud Development Environment</p>
-                
-                <div class="auth-tabs">
-                    <button class="tab-btn active" data-tab="login">Login</button>
-                    <button class="tab-btn" data-tab="register">Register</button>
+            <div class="auth-wrapper">
+                <div class="auth-box">
+                    <div class="logo">
+                        <i class="fas fa-code"></i>
+                        <h1>ShadowDevelop</h1>
+                    </div>
+                    <p class="tagline">Professional Cloud Development Environment</p>
+                    
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" data-tab="login">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                        <button class="tab-btn" data-tab="register">
+                            <i class="fas fa-user-plus"></i> Register
+                        </button>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="loginForm" class="auth-form active">
+                        <div class="form-group">
+                            <label>Username or Email</label>
+                            <input type="text" id="loginUsername" placeholder="Enter username or email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-arrow-right"></i> Login
+                        </button>
+                        <div class="divider">OR</div>
+                        <a href="/auth/github" class="btn-github">
+                            <i class="fab fa-github"></i> Login with GitHub
+                        </a>
+                    </form>
+                    
+                    <!-- Register Form -->
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="regUsername" placeholder="Choose username" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="regEmail" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="regPassword" placeholder="Create password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" id="regConfirm" placeholder="Confirm password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-user-check"></i> Register
+                        </button>
+                    </form>
                 </div>
                 
-                <form id="loginForm" class="auth-form active">
-                    <input type="text" placeholder="Username or Email" id="loginUsername" required>
-                    <input type="password" placeholder="Password" id="loginPassword" required>
-                    <button type="submit">Login</button>
-                    <p class="divider">OR</p>
-                    <a href="/auth/github" class="github-btn">Login with GitHub</a>
-                </form>
-                
-                <form id="registerForm" class="auth-form">
-                    <input type="text" placeholder="Username" id="regUsername" required>
-                    <input type="email" placeholder="Email" id="regEmail" required>
-                    <input type="password" placeholder="Password" id="regPassword" required>
-                    <input type="password" placeholder="Confirm Password" id="regConfirm" required>
-                    <button type="submit">Register</button>
-                </form>
+                <div class="auth-info">
+                    <div class="info-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Full-Featured IDE</h3>
+                        <p>Code online with syntax highlighting</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-terminal"></i>
+                        <h3>Terminal Access</h3>
+                        <p>SSH Terminal + Root Access</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-git-alt"></i>
+                        <h3>Git Integration</h3>
+                        <p>Clone & manage repositories</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-box"></i>
+                        <h3>Nix Environment</h3>
+                        <p>dev.nix support (like idx.google.com)</p>
+                    </div>
+                </div>
             </div>
         </div>
         
+        <!-- IDE Container -->
         <div class="ide-container" id="ideContainer" style="display: none;">
+            <!-- Sidebar -->
             <div class="sidebar">
-                <div class="user-profile">
-                    <img id="userAvatar" src="" alt="Avatar">
-                    <div class="user-info">
-                        <p id="userName"></p>
-                        <button class="logout-btn" onclick="logout()">Logout</button>
+                <div class="sidebar-header">
+                    <div class="user-profile">
+                        <img id="userAvatar" src="" alt="Avatar">
+                        <div class="user-info">
+                            <p id="userName">User</p>
+                            <small id="userEmail">email@example.com</small>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="file-explorer">
-                    <h3>Workspaces</h3>
-                    <button class="new-workspace-btn" onclick="createWorkspace()">+ New Workspace</button>
-                    <div id="workspacesList"></div>
+                <nav class="sidebar-nav">
+                    <button class="nav-item active" data-section="workspaces">
+                        <i class="fas fa-folder-open"></i> Workspaces
+                    </button>
+                    <button class="nav-item" data-section="files">
+                        <i class="fas fa-file-code"></i> Files
+                    </button>
+                    <button class="nav-item" data-section="git">
+                        <i class="fas fa-git-alt"></i> Repository
+                    </button>
+                    <button class="nav-item" data-section="ssh">
+                        <i class="fas fa-terminal"></i> SSH/Root
+                    </button>
+                    <button class="nav-item" data-section="nix">
+                        <i class="fas fa-snowflake"></i> Nix Env
+                    </button>
+                    <button class="nav-item" data-section="qemu">
+                        <i class="fas fa-server"></i> QEMU VM
+                    </button>
+                </nav>
+                
+                <div class="sidebar-actions">
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
                 </div>
             </div>
             
-            <div class="editor-section">
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Header -->
+                <div class="ide-header">
+                    <h2 id="headerTitle">ShadowDevelop</h2>
+                    <div class="header-actions">
+                        <button class="btn-action" onclick="createWorkspace()" title="New Workspace">
+                            <i class="fas fa-plus"></i> New Workspace
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Editor Tabs -->
                 <div class="editor-tabs">
                     <div id="editorTabs" class="tabs-container"></div>
                 </div>
                 
+                <!-- Editor Main -->
                 <div class="editor-main">
-                    <div id="codeEditor" class="code-editor"></div>
+                    <div id="codeEditor" class="code-editor" contenteditable="true" spellcheck="false"></div>
                 </div>
             </div>
             
+            <!-- Right Panel -->
             <div class="right-panel">
-                <div class="panel-tabs">
-                    <button class="panel-tab-btn active" data-panel="preview">Preview</button>
-                    <button class="panel-tab-btn" data-panel="terminal">Terminal</button>
-                    <button class="panel-tab-btn" data-panel="git">Git</button>
+                <div class="panel-header">
+                    <div class="panel-tabs">
+                        <button class="panel-tab-btn active" data-panel="terminal">
+                            <i class="fas fa-terminal"></i> Terminal
+                        </button>
+                        <button class="panel-tab-btn" data-panel="preview">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                        <button class="panel-tab-btn" data-panel="output">
+                            <i class="fas fa-list"></i> Output
+                        </button>
+                    </div>
                 </div>
                 
-                <div class="preview-panel panel active" id="previewPanel">
-                    <iframe id="previewFrame"></iframe>
+                <!-- Terminal Panel -->
+                <div class="terminal-panel panel active" id="terminalPanel">
+                    <div id="terminal" class="terminal-content"></div>
+                    <input type="text" id="terminalInput" placeholder="$ Enter command..." class="terminal-input" autofocus>
                 </div>
                 
-                <div class="terminal-panel panel" id="terminalPanel">
-                    <div id="terminal"></div>
-                    <input type="text" id="terminalInput" placeholder="$ Enter command..." class="terminal-input">
+                <!-- Preview Panel -->
+                <div class="preview-panel panel" id="previewPanel">
+                    <iframe id="previewFrame" sandbox="allow-scripts allow-same-origin"></iframe>
                 </div>
                 
-                <div class="git-panel panel" id="gitPanel">
-                    <h3>Git Repository</h3>
-                    <input type="text" id="repoUrl" placeholder="GitHub repo URL" class="git-input">
-                    <button onclick="importRepo()">Import Repository</button>
-                    <div id="gitStatus" class="git-status"></div>
+                <!-- Output Panel -->
+                <div class="output-panel panel" id="outputPanel">
+                    <div id="outputContent" class="output-content"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Workspace Modal -->
+        <div class="modal" id="workspaceModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Create New Workspace</h3>
+                    <button class="close-btn" onclick="closeModal('workspaceModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="workspaceName" placeholder="Workspace name" class="input-field">
+                    <textarea id="workspaceDesc" placeholder="Description" class="input-field"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeModal('workspaceModal')">Cancel</button>
+                    <button class="btn-primary" onclick="saveWorkspace()">Create</button>
                 </div>
             </div>
         </div>
     </div>
     
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/lib/xterm.js"></script>
     <script src="/lib/xterm-addon-fit.js"></script>
     <script src="/js/app.js"></script>
